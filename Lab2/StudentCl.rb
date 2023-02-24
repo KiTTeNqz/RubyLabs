@@ -12,13 +12,14 @@ class Student
 		self.email = options[:email]
 	end
 
-	def to_s
+	def to_s()
 		result = "#{last_name} #{first_name} #{parental_name}"
 		result += " id=#{id}" unless id.nil?
 		result += " phone=#{phone}" unless phone.nil?
 		result += " git=#{git}" unless git.nil?
 		result += " telegram=#{telegram}" unless telegram.nil?
 		result += " email=#{email}" unless email.nil?
+		result
 	end
 
 	def self.validate_phone
@@ -26,17 +27,3 @@ class Student
 	end
 
 end
-
-stud1 = Student.new(1, 2, 3, {id: 4, phone: 5, git: 6, telegram: 7, email:8})
-stud2 = Student.new(1, 2, 3, {id: 4})
-stud3 = Student.new(1, 2, 3)
-stud4 = Student.new(1, 2, 3, {phone: 4, email: 5})
-stud5 = Student.new(1, 2, 3, {telegram: 4, phone: 5, id: 6})
-stud6 = Student.new(1, 2, 3, {id: 4, email: 5, phone: 6, telegram: 7})
-
-puts(stud1.to_s())
-puts(stud2.to_s())
-puts(stud3.to_s())
-puts(stud4.to_s())
-puts(stud5.to_s())
-puts(stud6.to_s())
