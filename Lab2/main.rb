@@ -1,6 +1,6 @@
 require_relative 'StudentCl'
 
-stud1 = Student.new(1, 2, 3, {id: 4, phone: 5, git: 6, telegram: 7, email:8})
+stud1 = Student.new(1, 2, 3, {id: 4, phone: "+79054037715", git: 6, telegram: 7, email:8})
 stud2 = Student.new(1, 2, 3, {id: 4})
 stud3 = Student.new(1, 2, 3)
 stud4 = Student.new(1, 2, 3, {phone: 4, email: 5})
