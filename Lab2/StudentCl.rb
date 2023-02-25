@@ -75,4 +75,13 @@ class Student
 		@email=email1
 	end
 
+	def validate_contact()
+		!email.nil? || !telegram.nil? || !phone.nil?
+	end
+
+	def validate()
+		!git.nil? && validate_contact()
+	end
+	
+
 end
