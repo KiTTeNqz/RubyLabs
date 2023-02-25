@@ -29,7 +29,27 @@ class Student
 	end
 
 	def phone=(phone)
-		raise ArgumentError, "ERROR VALUE" if !phone.nil? && !Student.validate_phone(phone)
+		raise ArgumentError, "ERROR PHONE=#{phone}" unless phone.nil? || Student.validate_phone(phone)
+		@phone = phone
+	end
+
+	def self.validate_name(name)
+		return name.match(/^([А-Я][а-я]+)|([A-Z][a-z]+)$/)
+	end
+
+	def first_name=(first_name1)
+		raise ArgumentError, "ERROR first_name=#{first_name1}" unless Student.validate_name(first_name1)
+		@first_name=first_name1
+	end
+
+	def last_name=(last_name1)
+		raise ArgumentError, "ERROR last_name=#{last_name1}" unless Student.validate_name(last_name1)
+		@last_name=last_name1
+	end
+
+	def parental_name=(parental_name1)
+		raise ArgumentError, "ERROR parental_name=#{parental_name1}" unless Student.validate_name(parental_name1)
+		@parental_name=parental_name1
 	end
 
 end
