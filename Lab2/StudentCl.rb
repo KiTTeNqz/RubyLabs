@@ -82,6 +82,11 @@ class Student
 	def validate()
 		!git.nil? && validate_contact()
 	end
-	
+
+	def set_contacts(contacts={})
+		self.phone=contacts[:phone]
+		self.telegram=contacts[:telegram]
+		self.email=contacts[:email]
+	end
 
 end
