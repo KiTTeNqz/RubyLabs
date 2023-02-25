@@ -1,11 +1,11 @@
 require_relative 'StudentCl'
 
-stud1 = Student.new(1, 2, 3, {id: 4, phone: "+79054037715", git: 6, telegram: 7, email:8})
-stud2 = Student.new(1, 2, 3, {id: 4})
-stud3 = Student.new(1, 2, 3)
-stud4 = Student.new(1, 2, 3, {phone: 4, email: 5})
-stud5 = Student.new(1, 2, 3, {telegram: 4, phone: 5, id: 6})
-stud6 = Student.new(1, 2, 3, {id: 4, email: 5, phone: 6, telegram: 7})
+stud1 = Student.new("Иванов", "Иван", "Иванович", {id: 4, phone: "+79051111111", git: "@6", telegram: "@7", email:"s0163526@edu.kubsu.ru"})
+stud2 = Student.new("Сидоров", "Сергей", "Петрович", {id: 4})
+stud3 = Student.new("Худокормов", "Дмитрий", "Александрович")
+stud4 = Student.new("Ильченко", "Никита", "Алексеевич", {phone: "8 905 222-22-22", email: "123@mail.ru"})
+stud5 = Student.new("Романов", "Роман", "Романович", {telegram: "@4", phone: "+7(905)333-33-33", id: 6})
+stud6 = Student.new("Петров", "Олег", "Михайлович", {id: 4, email: "myMail@yandex.ru", phone: "+7 (905) 444-44-44", telegram: "@8"})
 
 puts(stud1.to_s())
 puts(stud2.to_s())
