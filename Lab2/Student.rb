@@ -1,10 +1,10 @@
+require 'json'
 require_relative 'StudentBase'
 class Student < StudentBase
 
 	public_class_method :new
 
-	attr_accessor :id
-	attr_reader :phone, :last_name, :first_name, :parental_name, :git, :telegram, :email
+	attr_reader :id, :phone, :last_name, :first_name, :parental_name, :git, :telegram, :email
 
 	def initialize(last_name, first_name, parental_name, options = {})
 		self.last_name = last_name
