@@ -24,17 +24,17 @@ class Student < StudentBase
 	end
 
 	def first_name=(first_name1)
-		raise ArgumentError, "ERROR first_name=#{first_name1}" unless StudentBase.validate_name(first_name1)
+		raise ArgumentError, "ERROR first_name=#{first_name1}" unless StudentBase.validate_name?(first_name1)
 		@first_name=first_name1
 	end
 
 	def last_name=(last_name1)
-		raise ArgumentError, "ERROR last_name=#{last_name1}" unless StudentBase.validate_name(last_name1)
+		raise ArgumentError, "ERROR last_name=#{last_name1}" unless StudentBase.validate_name?(last_name1)
 		@last_name=last_name1
 	end
 
 	def parental_name=(parental_name1)
-		raise ArgumentError, "ERROR parental_name=#{parental_name1}" unless StudentBase.validate_name(parental_name1)
+		raise ArgumentError, "ERROR parental_name=#{parental_name1}" unless StudentBase.validate_name?(parental_name1)
 		@parental_name=parental_name1
 	end
 
