@@ -37,7 +37,7 @@ class StudentShort < StudentBase
 
 	def to_s
 		[
-			"#{id}, #{fio}, #{git}, #{contact[:type]}, #{contact[:val]}"
+			"#{id}, #{fio}, #{git}, #{contact[:type]}: #{contact[:val]}"
 		].compact.join(' ')
 	end
 

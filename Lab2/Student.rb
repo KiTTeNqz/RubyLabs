@@ -13,6 +13,14 @@ class Student < StudentBase
 		super(options)
 	end
 
+	def self.from_json(hash)
+		raise ArgumentError,'Missing field: last_name' if hash[:last_name].nil?
+		raise ArgumentError,'Missing field: first_name' if hash[:first_name].nil?
+		raise ArgumentError,'Missing field: parental_name' if hash[:parental_name].nil?
+
+		Student.new
+	end
+
 	def to_s
 		[
 			"#{last_name} #{first_name} #{parental_name}",

@@ -1,3 +1,4 @@
+require 'json'
 class StudentBase
 	private_class_method :new
 
@@ -59,6 +60,21 @@ class StudentBase
 	def email=(email1)
 		raise ArgumentError, "ERROR email=#{email1}" unless email.nil? || StudentBase.validate_email(email1)
 		@email=email1
+	end
+
+	def self.parse_json(json_data)
+		case json_data
+			when String
+				if json_data.start_with?('{')&&json_data.end_with?('}')
+					data = JSON.parse(json_data)
+					result = data.map{|k, v| "#{k}: #{parse_json(v)}"}.join(', ')
+					"#{result}"
+				else json_data
+			end
+			when Hash
+				result = json_data.map{|k, v| "#{k}: #{parse_json(v)}"}.join(', ')
+				"#{result}"
+		end
 	end
 
 end
