@@ -1,12 +1,13 @@
+require 'json'
 class StudentShort
-	attr_reader :id, :contact, :fio, :git
+	attr_accessor :id, :contact, :fio, :git
 
 	def self.from_student_class(student)
 		StudentShort.new(student.id, student.get_info)
 	end
 
 	def initialize(id, str)
-		info_short = JSON.parse(str, symbolize_names: true)
+		info_short = str
 		raise ArgumentError, 'Missing fields: fio' if info_short[:short_fio].nil?
 		self.id=id
 		self.fio = info_short[:short_fio]
@@ -17,14 +18,16 @@ class StudentShort
 
 	#Хэщ, содержащий свойства объекта с безопасным доступом(.&)
 	def to_h
-		id: id
-		git: git
-		contact&.dig(:type)&.to_sym => contact&.dig(:value)
+		{
+			id: id,
+			git: git,
+			contact&.dig(:type)&.to_sym => contact&.dig(:value),
+		}
 	end
 
 	def to_s
 		[
-			"#{id} #{fio} #{git} #{contact}"
+			"#{id}, #{fio}, #{git}, #{contact}"
 		].compact.join(' ')
 	end
 

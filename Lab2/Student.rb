@@ -17,8 +17,8 @@ class Student
 		[
 			"#{last_name} #{first_name} #{parental_name}",
 			"id: #{id}",
-			"git: #{git}"
-			"telegram: #{telegram}"
+			"git: #{git}",
+			"telegram: #{telegram}",
 			"email: #{email}"
 		].compact.join(' ')
 	end
@@ -105,8 +105,11 @@ class Student
 	end
 
 	def get_info
-		contact = get_short_contact
-		"#{get_short_fio},#{git},#{contact[:type]},#{contact[:val]}"
+		info = {}
+		info[:short_fio] = get_short_fio
+		info[:short_contact] = get_short_contact
+		info[:git] = git
+		info
 	end
 
 end
