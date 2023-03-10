@@ -19,6 +19,6 @@ puts(stud6.validate())
 
 stud3.set_contacts({email: "mrxameleonx@mail.ru"})
 puts(stud3.to_s())
-puts(stud3.getInfo)
+puts(stud3.get_info)
 stud_str = Student.from_str("Худокормов,Дмитрий,Александрович,123,99999")
 puts(stud_str.to_s())

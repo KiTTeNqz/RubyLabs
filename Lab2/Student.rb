@@ -14,13 +14,13 @@ class Student
 	end
 
 	def to_s
-		result = "#{last_name} #{first_name} #{parental_name}"
-		result += " id=#{id}" unless id.nil?
-		result += " phone=#{phone}" unless phone.nil?
-		result += " git=#{git}" unless git.nil?
-		result += " telegram=#{telegram}" unless telegram.nil?
-		result += " email=#{email}" unless email.nil?
-		result
+		[
+			"#{last_name} #{first_name} #{parental_name}",
+			"id: #{id}",
+			"git: #{git}"
+			"telegram: #{telegram}"
+			"email: #{email}"
+		].compact.join(' ')
 	end
 
 
@@ -95,28 +95,18 @@ class Student
 		new(last_name, first_name, parental_name, options)
 	end
 
-	def getShortFIO
+	def get_short_fio
 		"#{last_name} #{first_name[0]}.#{parental_name[0]}."
 	end
 
-	def getShortContact
-		contact = {}
-		%i%telegram phone email%.each do |cont|
-			cont_val = send(cont)
-			next if cont_val.nil?
-
-			contact[:type] = cont
-			contact[:val] = cont_val
-			return contact
-		end
-
-		nil 
+	def get_short_contact
+		contact = %i[telegram phone email].find{|cont| send(cont)}
+		{type: contact, val: send(contact) } if contact
 	end
 
-	def getInfo
-		contact = getShortContact
-		"#{getShortFIO} git: #{git}, #{contact[:type]} : #{contact[:val]} "
+	def get_info
+		contact = get_short_contact
+		"#{get_short_fio},#{git},#{contact[:type]},#{contact[:val]}"
 	end
-
 
 end
