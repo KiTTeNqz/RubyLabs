@@ -20,7 +20,6 @@ class StudentBase
 		return prof_name.match(/(^[А-Я][а-я]+$)|(^[A-Z][a-z]+$)/)
 	end
 
-	private_class_method
 	def valid_cont?
 		!email.nil? || !telegram.nil? || !phone.nil?
 	end
