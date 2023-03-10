@@ -1,5 +1,9 @@
 require 'json'
-class StudentShort
+require_relative 'StudentBase'
+class StudentShort < StudentBase
+
+	public_class_method :new
+
 	attr_accessor :id, :contact, :fio, :git
 
 	def self.from_student_class(student)
@@ -16,7 +20,7 @@ class StudentShort
 	end
 
 
-	#Хэщ, содержащий свойства объекта с безопасным доступом(.&)
+	#Хэsh, содержащий свойства объекта с безопасным доступом(.&)
 	def to_h
 		{
 			id: id,
