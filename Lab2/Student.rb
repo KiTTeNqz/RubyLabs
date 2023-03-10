@@ -13,7 +13,7 @@ class Student
 		self.email = options[:email]
 	end
 
-	def to_s()
+	def to_s
 		result = "#{last_name} #{first_name} #{parental_name}"
 		result += " id=#{id}" unless id.nil?
 		result += " phone=#{phone}" unless phone.nil?
@@ -75,11 +75,11 @@ class Student
 		@email=email1
 	end
 
-	def validate_contact()
+	def validate_contact
 		!email.nil? || !telegram.nil? || !phone.nil?
 	end
 
-	def validate()
+	def validate
 		!git.nil? && validate_contact()
 	end
 
@@ -94,5 +94,29 @@ class Student
 		options = {id: id, phone: phone, git: git, telegram: telegram, email: email}
 		new(last_name, first_name, parental_name, options)
 	end
+
+	def getShortFIO
+		"#{last_name} #{first_name[0]}.#{parental_name[0]}."
+	end
+
+	def getShortContact
+		contact = {}
+		%i%telegram phone email%.each do |cont|
+			cont_val = send(cont)
+			next if cont_val.nil?
+
+			contact[:type] = cont
+			contact[:val] = cont_val
+			return contact
+		end
+
+		nil 
+	end
+
+	def getInfo
+		contact = getShortContact
+		"#{getShortFIO} git: #{git}, #{contact[:type]} : #{contact[:val]} "
+	end
+
 
 end
