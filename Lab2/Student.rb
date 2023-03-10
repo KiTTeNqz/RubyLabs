@@ -75,7 +75,7 @@ class Student
 		@email=email1
 	end
 
-	def validate_contact()v
+	def validate_contact()
 		!email.nil? || !telegram.nil? || !phone.nil?
 	end
 
@@ -87,6 +87,12 @@ class Student
 		self.phone=contacts[:phone]
 		self.telegram=contacts[:telegram]
 		self.email=contacts[:email]
+	end
+
+	def self.from_str(string)
+		last_name, first_name, parental_name, id, phone, git, telegram, email = string.split(',')
+		options = {id: id, phone: phone, git: git, telegram: telegram, email: email}
+		new(last_name, first_name, parental_name, options)
 	end
 
 end
