@@ -2,8 +2,6 @@ require 'json'
 class StudentBase
 	private_class_method :new
 
-	attr_accessor :id, :phone, :telegram, :git, :email
-
 	def self.validate_phone?(phone)
 		return phone.match(/^\+?[7,8] ?\(?\d{3}\)? ?\d{3}-?\d{2}-?\d{2}$/)
 	end
@@ -28,38 +26,25 @@ class StudentBase
 		!git.nil? && valid_cont?
 	end
 
-	def get_short_contact
-		contact = %i[telegram phone email].find{|cont| send(cont)}
-		{type: contact, val: send(contact) } if contact
+	def initialize(last_name, first_name, parental_name)
+		self.last_name = last_name
+		self.first_name = first_name
+		self.parental_name = parental_name
 	end
 
-	def initialize(options = {})
-		self.id = options[:id]
-		self.phone = options[:phone]
-		self.git = options[:git]
-		self.telegram = options[:telegram]
-		self.email = options[:email]
+	def first_name=(first_name1)
+		raise ArgumentError, "ERROR first_name=#{first_name1}" unless StudentBase.validate_name?(first_name1)
+		@first_name=first_name1
 	end
 
-	#Setters
-	def phone=(phone)
-		raise ArgumentError, "ERROR PHONE=#{phone}" unless phone.nil? || StudentBase.validate_phone?(phone)
-		@phone = phone
+	def last_name=(last_name1)
+		raise ArgumentError, "ERROR last_name=#{last_name1}" unless StudentBase.validate_name?(last_name1)
+		@last_name=last_name1
 	end
 
-	def telegram=(tg_name)
-		raise ArgumentError, "ERROR telegram=#{tg_name}" unless telegram.nil? || StudentBase.validate_git_tg?(tg_name)
-		@telegram=tg_name
-	end
-
-	def git=(git_name)
-		raise ArgumentError, "ERROR git=#{git_name}" unless git.nil? || StudentBase.validate_git_tg?(git_name)
-		@git=git_name
-	end
-
-	def email=(email1)
-		raise ArgumentError, "ERROR email=#{email1}" unless email.nil? || StudentBase.validate_email?(email1)
-		@email=email1
+	def parental_name=(parental_name1)
+		raise ArgumentError, "ERROR parental_name=#{parental_name1}" unless StudentBase.validate_name?(parental_name1)
+		@parental_name=parental_name1
 	end
 
 end

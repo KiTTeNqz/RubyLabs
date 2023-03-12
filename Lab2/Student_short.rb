@@ -1,4 +1,3 @@
-require 'json'
 require_relative 'StudentBase'
 class StudentShort < StudentBase
 
@@ -6,38 +5,33 @@ class StudentShort < StudentBase
 
 	#У нас уже есть некоторые гет\сет в базе, зачем же ещё?
 	private
-	attr_writer :fio, :contact
+	attr_writer :fio, :contact, :git, :id
 
 	public
-	attr_reader :fio, :contact
-
+	attr_reader :fio, :contact, :git, :id
 
 	def self.from_student_class(student)
 		StudentShort.new(student.id, student.get_info)
 	end
 
 	def initialize(id, str)
-		info_short = str
-		raise ArgumentError, 'Missing fields: fio' if info_short[:short_fio].nil?
+		info_short = str.split(',')
+						.map{|x| x.split(':')}
+						.map{|x| [x[0].to_sym, x[1]]}
+						.to_h
+		raise ArgumentError, 'Missing fields: fio' if info_short[:fio].nil?
 		self.id=id
-		self.fio = info_short[:short_fio]
-		self.contact = info_short[:short_contact]
+		self.fio = info_short[:fio]
 		self.git = info_short[:git]
+		info_short.delete_if{|k,v| k==:fio||k==:git}
+		self.contact = info_short
 	end
 
 
 	#Хэsh, содержащий свойства объекта с безопасным доступом(.&)
-	def to_h
-		{
-			id: id,
-			git: git,
-			contact&.dig(:type)&.to_sym => contact&.dig(:val),
-		}
-	end
-
 	def to_s
 		[
-			"#{id}, #{fio}, #{git}, #{contact[:type]}: #{contact[:val]}"
+			"#{id}, #{fio}, #{git}, #{contact}"
 		].compact.join(' ')
 	end
 

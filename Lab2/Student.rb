@@ -3,14 +3,16 @@ require_relative 'StudentBase'
 class Student < StudentBase
 
 	public_class_method :new
-
-	attr_reader :id, :phone, :last_name, :first_name, :parental_name, :git, :telegram, :email
+	attr_writer :id
+	attr_reader :last_name, :first_name, :parental_name, :id, :phone, :git, :telegram, :email
 
 	def initialize(last_name, first_name, parental_name, options = {})
-		self.last_name = last_name
-		self.first_name = first_name
-		self.parental_name = parental_name
-		super(options)
+		super(last_name, first_name, parental_name)
+		self.id = options[:id]
+		self.phone = options[:phone]
+		self.git = options[:git]
+		self.telegram = options[:telegram]
+		self.email = options[:email]
 	end
 	
 	def to_s
@@ -23,19 +25,26 @@ class Student < StudentBase
 		].compact.join(' ')
 	end
 
-	def first_name=(first_name1)
-		raise ArgumentError, "ERROR first_name=#{first_name1}" unless StudentBase.validate_name?(first_name1)
-		@first_name=first_name1
+
+	#Setters
+	def phone=(phone)
+		raise ArgumentError, "ERROR phone=#{phone}" unless phone.nil? || StudentBase.validate_phone?(phone)
+		@phone = phone
 	end
 
-	def last_name=(last_name1)
-		raise ArgumentError, "ERROR last_name=#{last_name1}" unless StudentBase.validate_name?(last_name1)
-		@last_name=last_name1
+	def telegram=(tg_name)
+		raise ArgumentError, "ERROR telegram=#{tg_name}" unless telegram.nil? || StudentBase.validate_git_tg?(tg_name)
+		@telegram=tg_name
 	end
 
-	def parental_name=(parental_name1)
-		raise ArgumentError, "ERROR parental_name=#{parental_name1}" unless StudentBase.validate_name?(parental_name1)
-		@parental_name=parental_name1
+	def git=(git_name)
+		raise ArgumentError, "ERROR git=#{git_name}" unless git.nil? || StudentBase.validate_git_tg?(git_name)
+		@git=git_name
+	end
+
+	def email=(email1)
+		raise ArgumentError, "ERROR email=#{email1}" unless email.nil? || StudentBase.validate_email?(email1)
+		@email=email1
 	end
 
 	def set_contacts(contacts={})
@@ -51,13 +60,27 @@ class Student < StudentBase
 	end
 
 	def get_short_fio
-		"#{last_name} #{first_name[0]}.#{parental_name[0]}."
+		"fio:#{last_name} #{first_name[0]}. #{parental_name[0]}."
+	end
+
+
+	def get_short_contact
+		contact = %i[telegram phone email].find{|cont| send(cont)}
+		{type: contact, val: send(contact)} if contact
+	end
+
+	def get_git
+		"git:#{git}"
 	end
 
 	def get_info
-		info = {}
-		info[:short_fio] = get_short_fio
-		info[:short_contact] = get_short_contact
+		"#{get_short_fio},#{get_short_contact[:type]}:#{get_short_contact[:val]},#{get_git}"
+	end
+
+	def get_info_hash
+		info={}
+		info[:fio] = get_short_fio
+		info[:contact] = get_short_contact
 		info[:git] = git
 		info
 	end
