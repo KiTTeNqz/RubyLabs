@@ -53,8 +53,10 @@ puts(stud3.to_s())
 #stud_str = Student.from_str("Худокормов,Дмитрий,Александрович,123,99999")
 #puts(stud_str.to_s())
 
+puts(stud1.get_info())
+
 stud_short = StudentShort.from_student_class(stud1)
-puts(stud_short.to_s())
+puts(stud_short.to_s)
 
 studs = read_from_txt('/home/dmitry/RubyLabs/Lab2/students.txt')
 
