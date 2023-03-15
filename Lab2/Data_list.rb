@@ -4,4 +4,6 @@ class Data_list
 		@selected_ids = []
 	end
 
+	
+
 end
