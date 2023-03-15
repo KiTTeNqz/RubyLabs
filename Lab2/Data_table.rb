@@ -12,6 +12,7 @@ class DataTable
 		@data[0].length
 	end
 
+
 	def num_rows
 		@data.length
 	end
