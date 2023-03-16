@@ -1,21 +1,19 @@
+require_relative 'Student'
 class StudentListTxt
 
+	public
 	attr_accessor :students, :gen_id
 
-	def initialize(students)
-		self.students = students.sort_by(&:id)
+	def initialize
+		self.students = []
 		self.gen_id = students.count + 1
 	end
 
-	def self.read_from_txt(file_path)
+	def read_from_txt(file_path)
 		raise ArgumentError.new("File not found #{file_path}") unless File.file?(file_path)
-
-		students = []
-		stud=""
 		File.foreach(file_path) do |line|
-			students<<Student.from_str(line)
+			students << Student.from_str(line.strip)
 		end
-		students
 	end
 
 	def self.write_to_txt(students,file_path)
@@ -40,6 +38,15 @@ class StudentListTxt
 		students << student
 		student.id = gen_id
 		nextId
+	end
+
+	def idk(k,n,existing_data: nil)
+		skip = (k-1) * n
+		new_data = students[skip, n].map{|s| StudentShort.from_student_class(s)}
+
+		return DataListStudentShort.new(new_data) if existing_data.nil?
+
+		existing_data.append(new_data)
 	end
 
 	def replace_student(student_id, student)

@@ -1,3 +1,1 @@
-fio:Иванченко И. И.,email:iii@mail.ru,git:@fus
-fio:Сергеева С. С.,phone:89054037777,git:@ro
-fio:Бирюков Б. Б.,telegram:@bbb,git:@duh
+fio:Иванченко И. И.,email:iii@mail.ru,git:@fusfio:Сергеева С. С.,phone:89054037777,git:@rofio:Бирюков Б. Б.,telegram:@bbb,git:@duh
