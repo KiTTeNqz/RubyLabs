@@ -1,0 +1,3 @@
+fio:Иванченко Иван Иванович,email:iii@mail.ru,git:@fus
+fio:Сергеева Станислава Серова,phone:89054037777,git:@ro
+fio:Бирюков Бернард Белов,telegram:@bbb,git:@duh
