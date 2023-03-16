@@ -55,9 +55,12 @@ class Student < StudentBase
 	end
 
 	def self.from_str(string)
-		last_name, first_name, parental_name, id, phone, git, telegram, email = string.split(',')
-		options = {id: id, phone: phone, git: git, telegram: telegram, email: email}
-		new(last_name, first_name, parental_name, options)
+		stud = string.split(',')
+				.map{|v| v.split(":")}
+				.map{|v| [v[0].to_sym, v[1]]}
+				.to_h
+		last_name, first_name, parental_name = stud[:fio].split(' ')
+		Student.new(last_name, first_name, parental_name, stud)
 	end
 
 	def get_short_fio

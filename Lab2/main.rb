@@ -2,36 +2,7 @@ require_relative 'Student'
 require_relative 'Student_short'
 require_relative 'Data_list'
 require_relative 'Data_list_student_short'
-
-def self.read_from_txt(file_path)
-	raise ArgumentError.new("File not found #{file_path}") unless File.file?(file_path)
-
-	students = []
-	stud=""
-	File.foreach(file_path) do |line|
-		stud << line
-	end
-	
-	all_studs = JSON.parse(stud)
-	all_studs["Students"].each do |hash_stud|
-		students << Student.new(hash_stud['last_name'], 
-								hash_stud['first_name'], 
-								hash_stud['parental_name'], 
-								hash_stud.delete_if{|k,v| k=='last_name'||k=='first_name'||k=='parental_name'}.transform_keys(&:to_sym))
-	end
-	students
-end
-
-
-def self.write_to_txt(students,file_path)
-	out_string = '{"Students":['
-	students.each do |stud|
-		out_string+=stud.to_json+','
-	end
-	out_string = out_string.chop+"]}"
-	File.write(file_path, out_string)
-end
-
+require_relative 'Student_list_txt'
 
 stud1 = Student.new("Иванов", "Иван", "Иванович", {id: 1, phone: "+79051111111", git: "@6", telegram: "@7", email:"s0163526@edu.kubsu.ru"})
 stud2 = Student.new("Сидоров", "Сергей", "Петрович", {id: 2})
@@ -60,7 +31,7 @@ puts(stud1.get_info())
 stud_short = StudentShort.from_student_class(stud1)
 puts(stud_short.to_s)
 
-studs = read_from_txt('/home/dmitry/RubyLabs/Lab2/students.txt')
+studs = StudentListTxt.read_from_txt('/home/dmitry/RubyLabs/Lab2/studentsRead.txt')
 
 puts(studs)
 
@@ -71,7 +42,7 @@ end
 
 puts(short_studs)
 
-#write_to_txt(studs, '/home/dmitry/RubyLabs/Lab2/students1.txt')
+StudentListTxt.write_to_txt(studs, '/home/dmitry/RubyLabs/Lab2/students1.txt')
 students = [stud1, stud5, stud6].map{|student| StudentShort.from_student_class(student)}
 datalist  = DataListStudentShort.new(students)
 datalist.select(1)

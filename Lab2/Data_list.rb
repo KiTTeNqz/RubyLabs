@@ -27,9 +27,9 @@ class DataList
 
 	private
 	def instance_variables_wout_id(object)
-		object.instance_variables.map{|v| object.instance_variable_get(v) unless v.to_sym == :@id}
+		object.instance_variables.reject{|v| v.to_sym ==:@id}.map{|v| object.instance_variable_get(v)}
 	end
 
-	
+
 
 end

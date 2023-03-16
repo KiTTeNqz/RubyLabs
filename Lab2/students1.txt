@@ -1,1 +1,3 @@
-{"Students":["Иванов Иван Иванович id: 4 git: @6 telegram: @7 email: s0163526@edu.kubsu.ru"]}
+fio:Иванченко И. И.,email:iii@mail.ru,git:@fus
+fio:Сергеева С. С.,phone:89054037777,git:@ro
+fio:Бирюков Б. Б.,telegram:@bbb,git:@duh
