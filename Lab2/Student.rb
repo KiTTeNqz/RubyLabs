@@ -4,6 +4,7 @@ class Student < StudentBase
 
 	public_class_method :new
 	attr_writer :id
+	public
 	attr_reader :last_name, :first_name, :parental_name, :id, :phone, :git, :telegram, :email
 
 	def initialize(last_name, first_name, parental_name, options = {})
@@ -74,6 +75,7 @@ class Student < StudentBase
 	end
 
 	def get_info
+		puts("Get_info #{get_short_fio},#{get_short_contact[:type]}:#{get_short_contact[:val]},#{get_git}")
 		"#{get_short_fio},#{get_short_contact[:type]}:#{get_short_contact[:val]},#{get_git}"
 	end
 
