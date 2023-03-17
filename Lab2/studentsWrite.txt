@@ -1,0 +1,4 @@
+last_name:Иванченко,first_name:Иван,parental_name:Иванович,id:1,git:@fus,email:iii@mail.ru
+last_name:Сергеева,first_name:Станислава,parental_name:Серова,id:2,phone:89054037777,git:@ro
+last_name:Бирюков,first_name:Бернард,parental_name:Белов,id:3,git:@duh,telegram:@bbb
+last_name:Голубев,first_name:Глеб,parental_name:Газманович,id:4

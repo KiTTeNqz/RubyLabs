@@ -1,29 +1,22 @@
-require_relative 'Student'
-class StudentListTxt
+class StudentList
+	attr_accessor :students, :gen_id, :typer
 
-	public
-	attr_accessor :students, :gen_id
-
-	def initialize
+	def initialize(typer)
 		self.students = []
 		self.gen_id = students.count + 1
+		self.typer = typer
 	end
 
-	def read_from_txt(file_path)
+	def read_file(file_path)
 		raise ArgumentError.new("File not found #{file_path}") unless File.file?(file_path)
-		File.foreach(file_path) do |line|
-			students << Student.from_str(line.strip)
-		end
+		hash_students = typer.convert_read(File.read(file_path))
+		self.students = hash_students.map{|h| Student.from_hash(h)}
+		nextId
 	end
 
-	def self.write_to_txt(students,file_path)
-		File.open(file_path, 'w'){ |file|
-			file.write(
-				students.map{
-					|stud| stud.get_info
-				}.join()
-				)
-		}
+	def write_file(file_path)
+		hash_students = students.map(&:to_hash)
+		File.write(file_path, typer.convert_write(hash_students))
 	end
 
 	def student_by_id(stud_id)
@@ -59,6 +52,7 @@ class StudentListTxt
 	end
 
 	def nextId
-		self.gen_id=students.max_by(&:id) + 1
+		self.gen_id=students.max_by(&:id).id + 1
 	end
+
 end
