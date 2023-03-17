@@ -64,6 +64,13 @@ class Student < StudentBase
 		Student.new(last_name, first_name, parental_name, stud)
 	end
 
+	def self.from_hash(hash)
+		raise ArgumentError,"Missing req fields" unless hash.key?(:fio)
+		fio = hash[:fio].split(' ')
+		hash.delete(:fio) 
+		Student.new(fio[0], fio[1], fio[2], hash)
+	end
+
 	def get_short_fio
 		"fio:#{last_name} #{first_name[0]}. #{parental_name[0]}."
 	end
