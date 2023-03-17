@@ -25,7 +25,7 @@ class StudentShort < StudentBase
 		self.fio = info_short[:fio]
 		self.git = info_short[:git]
 		info_short.delete_if{|k,v| k==:fio||k==:git}
-		self.contact = info_short 
+		self.contact = info_short
 	end
 
 
