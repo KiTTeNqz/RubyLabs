@@ -8,7 +8,6 @@ class StudentListJSON
 		file_content = File.read(file_path)
 		hashed_students = JSON.parse(file_content, {symbolize_names: true})
 		hashed_students.each do |stud|
-			puts(stud)
 			students << Student.from_hash(stud)
 		end
 		nextId
@@ -30,7 +29,7 @@ class StudentListJSON
 	end
 
 	def sorted
-		students.sort_by(&:fio)
+		students.sort_by(&:last_name)
 	end
 
 	def add_student(student)
@@ -67,4 +66,7 @@ studlist = StudentListJSON.new()
 studlist.readFile('/home/dmitry/RubyLabs/Lab2/studentsRead.json')
 puts(studlist.students)
 studlist.add_student(Student.from_str('fio:Ежанов Еж Ежевич'))
+studlist.writeFile(studlist.students.map(&:to_hash), '/home/dmitry/RubyLabs/Lab2/studentsWrite.json')
+studlist.readFile('/home/dmitry/RubyLabs/Lab2/studentsWrite.json')
+studlist.sorted
 puts(studlist.students)

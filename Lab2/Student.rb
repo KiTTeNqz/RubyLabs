@@ -21,6 +21,7 @@ class Student < StudentBase
 			"#{last_name} #{first_name} #{parental_name}",
 			"id: #{id}",
 			"git: #{git}",
+			"phone: #{phone}",
 			"telegram: #{telegram}",
 			"email: #{email}"
 		].compact.join(' ')
@@ -60,15 +61,15 @@ class Student < StudentBase
 				.map{|v| [v[0].to_sym, v[1]]}
 				.to_h
 		last_name, first_name, parental_name = stud[:fio].split(' ')
-		puts(stud)
 		Student.new(last_name, first_name, parental_name, stud)
 	end
 
 	def self.from_hash(hash)
-		raise ArgumentError,"Missing req fields" unless hash.key?(:fio)
-		fio = hash[:fio].split(' ')
-		hash.delete(:fio) 
-		Student.new(fio[0], fio[1], fio[2], hash)
+		raise ArgumentError,"Missing req fields" unless hash.key?(:last_name) && hash.key?(:first_name) && hash.key?(:parental_name)
+		last_name = hash.delete(:last_name)
+		first_name = hash.delete(:first_name)
+		parental_name = hash.delete(:parental_name)
+		Student.new(last_name, first_name, parental_name, hash)
 	end
 
 	def get_short_fio
@@ -97,4 +98,12 @@ class Student < StudentBase
 		info
 	end
 
+	def to_hash
+		fields = {}
+		%i[last_name first_name parental_name id phone git telegram email].each do |field|
+			field_val = send(field)
+			fields[field] = field_val unless field_val.nil?
+		end
+		fields
+	end
 end
