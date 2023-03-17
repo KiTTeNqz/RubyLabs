@@ -11,6 +11,7 @@ class StudentShort < StudentBase
 	attr_reader :fio, :contact, :git, :id
 
 	def self.from_student_class(student)
+		puts("In studentShort: #{student.to_s}")
 		StudentShort.new(student.id, student.get_info)
 	end
 
@@ -19,20 +20,22 @@ class StudentShort < StudentBase
 						.map{|x| x.split(':')}
 						.map{|x| [x[0].to_sym, x[1]]}
 						.to_h
+		puts("info_short #{info_short}")
 		raise ArgumentError, 'Missing fields: fio' if info_short[:fio].nil?
 		self.id=id
 		self.fio = info_short[:fio]
 		self.git = info_short[:git]
 		info_short.delete_if{|k,v| k==:fio||k==:git}
+		puts("info_short2 #{info_short}")
 		self.contact = info_short
 	end
 
 
-	#Хэsh, содержащий свойства объекта с безопасным доступом(.&)
 	def to_s
+
 		[
-			"#{id}, #{fio}, #{git}, #{contact}"
+			"#{id}, #{fio}, #{git}, #{contact.first[0]}:#{contact.first[1]}"
 		].compact.join(' ')
 	end
-
+	
 end

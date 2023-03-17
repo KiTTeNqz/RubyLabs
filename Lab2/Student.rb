@@ -56,11 +56,19 @@ class Student < StudentBase
 
 	def self.from_str(string)
 		stud = string.split(',')
-				.map{|v| v.split(":")}
+				.map{|v| v.split(':')}
 				.map{|v| [v[0].to_sym, v[1]]}
 				.to_h
 		last_name, first_name, parental_name = stud[:fio].split(' ')
+		puts(stud)
 		Student.new(last_name, first_name, parental_name, stud)
+	end
+
+	def self.from_hash(hash)
+		raise ArgumentError,"Missing req fields" unless hash.key?(:fio)
+		fio = hash[:fio].split(' ')
+		hash.delete(:fio) 
+		Student.new(fio[0], fio[1], fio[2], hash)
 	end
 
 	def get_short_fio
@@ -78,7 +86,6 @@ class Student < StudentBase
 	end
 
 	def get_info
-		puts("Get_info #{get_short_fio},#{get_short_contact[:type]}:#{get_short_contact[:val]},#{get_git}")
 		"#{get_short_fio},#{get_short_contact[:type]}:#{get_short_contact[:val]},#{get_git}"
 	end
 

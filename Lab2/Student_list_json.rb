@@ -1,29 +1,28 @@
+require 'json'
 require_relative 'Student'
-class StudentListTxt
-
+class StudentListJSON
 	public
 	attr_accessor :students, :gen_id
+
+	def readFile(file_path)
+		file_content = File.read(file_path)
+		hashed_students = JSON.parse(file_content, {symbolize_names: true})
+		hashed_students.each do |stud|
+			puts(stud)
+			students << Student.from_hash(stud)
+		end
+		nextId
+	end
+
+	def writeFile(hash, file_path)
+		File.open(file_path, 'w') do |file|
+			file.write(JSON.pretty_generate(hash))
+		end
+	end
 
 	def initialize
 		self.students = []
 		self.gen_id = students.count + 1
-	end
-
-	def read_from_txt(file_path)
-		raise ArgumentError.new("File not found #{file_path}") unless File.file?(file_path)
-		File.foreach(file_path) do |line|
-			students << Student.from_str(line.strip)
-		end
-	end
-
-	def self.write_to_txt(students,file_path)
-		File.open(file_path, 'w'){ |file|
-			file.write(
-				students.map{
-					|stud| stud.get_info
-				}.join()
-				)
-		}
 	end
 
 	def student_by_id(stud_id)
@@ -59,6 +58,13 @@ class StudentListTxt
 	end
 
 	def nextId
-		self.gen_id=students.max_by(&:id) + 1
+		self.gen_id=students.max_by(&:id).id + 1
 	end
+
 end
+
+studlist = StudentListJSON.new()
+studlist.readFile('/home/dmitry/RubyLabs/Lab2/studentsRead.json')
+puts(studlist.students)
+studlist.add_student(Student.from_str('fio:Ежанов Еж Ежевич'))
+puts(studlist.students)

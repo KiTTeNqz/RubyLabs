@@ -25,6 +25,10 @@ class DataList
 		DataTable.new(data)
 	end
 
+	def append(new_data)
+		@list.append(new_data)	
+	end
+
 	private
 	def instance_variables_wout_id(object)
 		object.instance_variables.reject{|v| v.to_sym ==:@id}.map{|v| object.instance_variable_get(v)}
