@@ -1,24 +1,32 @@
 [
 	{
-		"fio": "Иванченко Иван Иванович",
+		"last_name": "Иванченко",
+		"first_name": "Иван",
+		"parental_name": "Иванович",
 		"id": 1,
 		"email": "iii@mail.ru",
 		"git": "@fus"
 	},
 	{
-		"fio": "Сергеева Станислава Серова",
+		"last_name": "Сергеева",
+		"first_name": "Станислава",
+		"parental_name": "Серова",
 		"id": 2,
 		"phone": "89054037777",
 		"git": "@ro"
 	},
 	{
-		"fio": "Бирюков Бернард Белов",
+		"last_name": "Бирюков",
+		"first_name": "Бернард",
+		"parental_name": "Белов",
 		"id": 3,
 		"telegram": "@bbb",
 		"git": "@duh"
 	},
 	{
-		"fio": "Иванов Иван Иванович",
+		"last_name": "Иванов",
+		"first_name": "Иван",
+		"parental_name": "Иванович",
 		"id": 4,
 		"phone": "+79051111111",
 		"telegram": "@7", 
