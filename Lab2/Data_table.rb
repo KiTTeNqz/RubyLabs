@@ -1,20 +1,22 @@
 class DataTable
 
+	attr_accessor :data
+
 	def initialize(data)
-		@data = data
+		self.data = data
 	end
 
 	def get_cell(row,col)
-		@data[row][col]
+		self.data[row][col]
 	end
 
 	def num_columns
-		@data[0].length
+		self.data[0].length
 	end
 
 
 	def num_rows
-		@data.length
+		self.data.length
 	end
 
 end
