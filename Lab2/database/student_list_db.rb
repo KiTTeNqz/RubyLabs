@@ -1,7 +1,16 @@
 # frozen_string_literal: true
 require_relative './students_db.rb'
+
 class StudentListDB
   attr_accessor :database
+
+  @@instance = StudentListDB.new
+
+  def self.instance
+    @@instance
+  end
+
+  private_class_method :new
 
   def initialize
     self.database = StudentDB.new()
@@ -30,5 +39,4 @@ class StudentListDB
   def count
     database.count
   end
-
 end

@@ -9,6 +9,6 @@ require_relative 'Converter_json'
 require_relative './database/student_list_db'
 require 'mysql2'
 
-db = StudentListDB.new
+db = StudentListDB.instance
 puts db.get_student(2)
 puts db.count
