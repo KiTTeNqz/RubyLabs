@@ -58,7 +58,7 @@ class StudentDB
     self.add_student(student_data.to_hash)
   end
 
-  def get_k_n_student_short_list(k, n)
+  def get_students_pag(k, n)
     rows = db_connection.query("SELECT * FROM student ORDER BY id LIMIT #{n} OFFSET #{(k-1)*n}")
     data_list = DataListStudentShort.new
     rows.each do |row|

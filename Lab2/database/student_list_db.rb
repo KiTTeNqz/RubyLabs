@@ -10,7 +10,6 @@ class StudentListDB
     @@instance ||= StudentListDB.new
   end
 
-  private_class_method :new
 
   def initialize
     self.database = StudentDB.new()
@@ -32,7 +31,7 @@ class StudentListDB
     database.add_student(student.as_json)
   end
 
-  def get_students_slice(k, n)
+  def get_students_pag(k, n)
     database.get_k_n_student_short_list(k, n)
   end
 

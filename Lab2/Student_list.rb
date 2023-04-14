@@ -1,6 +1,8 @@
 class StudentList
+  private
 	attr_accessor :students, :gen_id, :typer
 
+  public
 	def initialize(typer)
 		self.students = []
 		self.gen_id = students.count + 1
@@ -19,7 +21,7 @@ class StudentList
 		File.write(file_path, typer.convert_write(hash_students))
 	end
 
-	def student_by_id(stud_id)
+	def get_student(stud_id)
 		students.find{|s| s.id == stud_id}
 	end
 
@@ -33,7 +35,7 @@ class StudentList
 		nextId
 	end
 
-	def idk(k,n,existing_data: nil)
+	def get_students_pag(k,n,existing_data: nil)
 		skip = (k-1) * n
 		new_data = students[skip, n].map{|s| StudentShort.from_student_class(s)}
 
@@ -47,11 +49,11 @@ class StudentList
 		self.students[idx]=student
 	end
 
-	def delete_student(student_id)
+	def remove_student(student_id)
 		self.students.reject! {|s| s.id==student.id}
 	end
 
-  def get_students_count
+  def count
 		self.students.count
 	end
 
