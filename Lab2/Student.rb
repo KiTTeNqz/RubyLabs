@@ -15,15 +15,15 @@ class Student < StudentBase
 		self.telegram = options[:telegram]
 		self.email = options[:email]
 	end
-	
+
 	def to_s
 		[
 			"#{last_name} #{first_name} #{parental_name}",
-			"id: #{id}",
-			"git: #{git}",
-			"phone: #{phone}",
-			"telegram: #{telegram}",
-			"email: #{email}"
+			id ? "id: #{id}" : nil,
+			git ? "git: #{git}" : nil,
+			phone ? "phone: #{phone}" : nil,
+			telegram ? "telegram: #{telegram}" : nil,
+			email ? "email: #{email}" : nil
 		].compact.join(' ')
 	end
 
