@@ -44,11 +44,15 @@ class StudentList
 
 	def replace_student(student_id, student)
 		idx = student.find{|s| s.id==student.id}
-		students[idx]=student
+		self.students[idx]=student
 	end
 
 	def delete_student(student_id)
-		students.reject! {|s| s.id==student.id}
+		self.students.reject! {|s| s.id==student.id}
+	end
+
+  def get_students_count
+		self.students.count
 	end
 
 	def nextId
