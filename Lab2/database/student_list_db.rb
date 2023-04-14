@@ -4,10 +4,10 @@ require_relative './students_db.rb'
 class StudentListDB
   attr_accessor :database
 
-  @@instance = StudentListDB.new
+  @@instance = nil
 
   def self.instance
-    @@instance
+    @@instance ||= StudentListDB.new
   end
 
   private_class_method :new
