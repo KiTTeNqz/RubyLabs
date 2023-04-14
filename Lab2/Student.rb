@@ -28,6 +28,7 @@ class Student < StudentBase
 	end
 
 
+
 	#Setters
 	def phone=(phone)
 		raise ArgumentError, "ERROR phone=#{phone}" unless phone.nil? || StudentBase.validate_phone?(phone)
