@@ -25,6 +25,8 @@ class StudentsListDBAdapter < StudentsListAdapter
   private
   attr_accessor :database_list
 
+  public_class_method :new
+  
   public
   def initialize(database_list)
     self.database_list = database_list
@@ -59,6 +61,8 @@ class StudentsListConverterAdapter < StudentsListAdapter
   private
   attr_accessor :converter
 
+  public_class_method :new
+  
   public
   def initialize(converter, filename)
     self.converter = converter
