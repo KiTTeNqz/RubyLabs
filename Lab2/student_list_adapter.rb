@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class StudentsListAdapter
+  private_class_method :new
   def get_student(id)
   end
 
