@@ -11,14 +11,14 @@ class StudentList
 
 	def read_file(file_path)
 		raise ArgumentError.new("File not found #{file_path}") unless File.file?(file_path)
-		hash_students = typer.convert_read(File.read(file_path))
+		hash_students = typer.read_file(File.read(file_path))
 		self.students = hash_students.map{|h| Student.from_hash(h)}
 		nextId
 	end
 
 	def write_file(file_path)
 		hash_students = students.map(&:to_hash)
-		File.write(file_path, typer.convert_write(hash_students))
+		File.write(file_path, typer.write_file(hash_students))
 	end
 
 	def get_student(stud_id)
@@ -51,7 +51,7 @@ class StudentList
 	end
 
 	def remove_student(student_id)
-		self.students.reject! {|s| s.id==student.id}
+		self.students.reject! {|s| s.id==student_id}
 	end
 
   def count

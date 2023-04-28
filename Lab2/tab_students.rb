@@ -81,9 +81,9 @@ class TabStudents
           table_editable: false,
           table_columns: {
             '#' => :text,
+            'Фамилия И. О' => :text,
             'Гит' => :text,
             'Контакт' => :text,
-            'Фамилия И. О' => :text
           }
         )
 

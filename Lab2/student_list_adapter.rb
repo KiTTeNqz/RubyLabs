@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require_relative 'Student_list'
 class StudentsListAdapter
   private_class_method :new
   def get_student(id)
@@ -59,37 +59,37 @@ end
 
 class StudentsListConverterAdapter < StudentsListAdapter
   private
-  attr_accessor :converter
+  attr_accessor :file_list
 
   public_class_method :new
   
   public
-  def initialize(converter, filename)
-    self.converter = converter
-    converter.read_file(filename)
+  def initialize(file_list, filename)
+    self.file_list = file_list
+    self.file_list.read_file(filename)
   end
 
   def get_student(id)
-    converter.get_student(id)
+    file_list.get_student(id)
   end
 
   def remove_student(id)
-    converter.remove_student(id)
+    file_list.remove_student(id)
   end
 
   def replace_student(id, student)
-    converter.replace_student(id, student)
+    file_list.replace_student(id, student)
   end
 
   def get_students_pag(k, n, data=nil)
-    converter.get_students_pag(k, n, data)
+    file_list.get_students_pag(k, n, data)
   end
 
   def add_student(student)
-    converter.add_student(student)
+    file_list.add_student(student)
   end
 
   def count
-    converter.count
+    file_list.count
   end
 end

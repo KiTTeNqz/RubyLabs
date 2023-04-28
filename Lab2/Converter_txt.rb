@@ -2,7 +2,7 @@ require_relative 'Converter'
 class ConverterTxt < Converter
 	public_class_method :new
 
-	def convert_read(data)
+	def read_file(data)
 		result = []
 		file_content = data.split("\n")
 		file_content.each do |line|
@@ -17,7 +17,7 @@ class ConverterTxt < Converter
 		result
 	end
 
-	def convert_write(hash_students)
+	def write_file(hash_students)
 		string_arr = hash_students.map do |hash|
 			hash.map{|k,v| "#{k}:#{v}"}.join(',')
 		end.join("\n")
