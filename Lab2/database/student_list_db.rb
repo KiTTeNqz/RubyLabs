@@ -28,7 +28,7 @@ class StudentListDB
   end
 
   def add_student(student)
-    database.add_student(student.as_json)
+    database.add_student(student.to_hash)
   end
 
   def get_students_pag(k, n, data)

@@ -39,6 +39,7 @@ class StudentDB
   end
 
   def add_student(student_data)
+
     db_connection.query("""
         INSERT INTO student (last_name, first_name, parental_name, git, phone, email, telegram) VALUES
         ROW(

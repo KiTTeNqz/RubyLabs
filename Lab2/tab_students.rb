@@ -5,6 +5,7 @@ require 'glimmer-dsl-libui'
 require_relative 'event_manager'
 require_relative  'event_update_student_table'
 require_relative 'student_list_controller'
+require_relative 'student_input_form'
 
 class TabStudents
   include Glimmer
@@ -78,6 +79,10 @@ class TabStudents
       vertical_box {
         @table = refined_table(
           table_editable: false,
+          filter: lambda do |row_hash, query|
+            utf8_query = query.force_encoding("utf-8")
+            row_hash['Фамилия И. О'].include?(utf8_query)
+          end,
           table_columns: {
             '#' => :text,
             'Фамилия И. О' => :text,
@@ -116,7 +121,13 @@ class TabStudents
       vertical_box {
         stretchy true
 
-        button('Добавить') { stretchy false }
+        button('Добавить') {
+          stretchy false
+
+          on_clicked {
+            StudentInputForm.new.create.show
+          }
+        }
         button('Изменить') { stretchy false }
         button('Удалить') { stretchy false }
         button('Обновить') { stretchy false }
