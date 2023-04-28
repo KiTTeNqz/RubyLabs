@@ -58,14 +58,16 @@ class StudentDB
     self.add_student(student_data.to_hash)
   end
 
-  def get_students_pag(k, n, data)
+  def get_students_pag(k, n, existing_data = nil)
     rows = db_connection.query("SELECT * FROM student ORDER BY id LIMIT #{n} OFFSET #{(k-1)*n}")
     data_list = DataListStudentShort.new
     rows.each do |row|
       row_sym = row.transform_keys{|key| key.to_sym}
-      print(row_sym)
       data_list.append(StudentShort.from_student_class(Student.from_hash(row_sym)))
     end
+    return data_list if existing_data.nil?
+    existing_data.replace_objects(data_list.objects)
+    existing_data
   end
 
   def count

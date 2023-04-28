@@ -39,6 +39,7 @@ class StudentListController
 
   def refresh_data(page, per_page)
     @data_list = @student_list.get_students_pag(page, per_page, @data_list)
+    @data_list.objects.map{|el| print("DT: "+el.to_s)}
     @view.update_student_count(@student_list.count)
   end
 

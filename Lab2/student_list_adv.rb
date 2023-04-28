@@ -20,7 +20,7 @@ class StudentListAdv
     students_list_adapter.replace_student(id, student)
   end
 
-  def get_students_pag(k, n, data=nil)
+  def get_students_pag(k, n, data)
     students_list_adapter.get_students_pag(k, n, data)
   end
 

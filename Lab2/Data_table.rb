@@ -14,9 +14,12 @@ class DataTable
 		self.data[0].length
 	end
 
-
 	def num_rows
 		self.data.length
+	end
+
+	def to_2d_array
+		data.dup
 	end
 
 end

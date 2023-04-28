@@ -35,13 +35,14 @@ class StudentList
 		nextId
 	end
 
-	def get_students_pag(k,n,existing_data: nil)
+	def get_students_pag(k,n,existing_data = nil)
 		skip = (k-1) * n
 		new_data = students[skip, n].map{|s| StudentShort.from_student_class(s)}
 
 		return DataListStudentShort.new(new_data) if existing_data.nil?
 
-		existing_data.append(new_data)
+		existing_data.replace_objects(new_data)
+		existing_data
 	end
 
 	def replace_student(student_id, student)

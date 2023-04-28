@@ -21,18 +21,19 @@ class StudentShort < StudentBase
 						.map{|x| [x[0].to_sym, x[1]]}
 						.to_h
 		raise ArgumentError, 'Missing fields: fio' if info_short[:fio].nil?
+		print(info_short)
 		self.id=id
 		self.fio = info_short[:fio]
 		self.git = info_short[:git]
 		info_short.delete_if{|k,v| k==:fio||k==:git}
-		self.contact = info_short
+		self.contact = info_short.values.first
 	end
 
 
 	def to_s
 
 		[
-			"#{id}, #{fio}, #{git}, #{contact.first[0]}:#{contact.first[1]}"
+			"#{id}, #{fio}, #{git}, #{contact}"
 		].compact.join(' ')
 	end
 	

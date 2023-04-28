@@ -9,8 +9,6 @@ class StudentListDB
   def self.instance
     @@instance ||= StudentListDB.new
   end
-  
-  private_class_method :new
 
 
   def initialize

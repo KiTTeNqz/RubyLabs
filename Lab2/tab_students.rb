@@ -2,7 +2,10 @@
 
 # frozen_string_literal: true
 require 'glimmer-dsl-libui'
+require_relative 'event_manager'
+require_relative  'event_update_student_table'
 require_relative 'student_list_controller'
+
 class TabStudents
   include Glimmer
   STUDENTS_PER_PAGE = 20
@@ -14,7 +17,16 @@ class TabStudents
   end
 
   def on_create
+    EventManager.subscribe(self, EventUpdateStudentsTable)
     @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+  end
+
+  def on_event(event)
+    case event
+    when EventUpdateStudentsTable
+      puts event.new_table.to_2d_array
+      @table.model_array = event.new_table.to_2d_array
+    end
   end
 
   def update_student_count(new_cnt)
@@ -65,19 +77,15 @@ class TabStudents
 
       # Секция 2
       vertical_box {
-        @table = table {
-
-          text_column('ФИО')
-          text_column('Github')
-          text_column('Контакт')
-
-          editable false
-
-          cell_rows [['Худокормов Д.А.', 'kittenqz', '+79094496999'],
-                     ['Лукашев. А.А.', 'baran', '+79007008090'],
-                     ['Гаврик Д.Р.', nil, 'gavrillo@mail.ru'],
-                     ['Глызыренко Б.А.', 'TOP-G', nil]]
-        }
+        @table = refined_table(
+          table_editable: false,
+          table_columns: {
+            '#' => :text,
+            'Гит' => :text,
+            'Контакт' => :text,
+            'Фамилия И. О' => :text
+          }
+        )
 
         @pages = horizontal_box {
           stretchy false
