@@ -7,6 +7,7 @@ require_relative './database/student_list_db'
 require_relative 'Converter_json'
 require_relative 'Converter'
 require_relative 'Student_list'
+require 'win32api'
 require 'mysql2'
 class StudentListController
   def initialize(view)
