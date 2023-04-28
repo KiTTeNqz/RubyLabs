@@ -17,20 +17,19 @@ class TabStudents
   end
 
   def on_create
-    EventManager.subscribe(self, EventUpdateStudentsTable)
+    @controller.on_view_created
     @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
   end
 
-  def on_event(event)
-    case event
-    when EventUpdateStudentsTable
-      puts event.new_table.to_2d_array
-      @table.model_array = event.new_table.to_2d_array
-    end
+  # Метод наблюдателя datalist
+  def on_datalist_changed(new_table)
+    arr = new_table.to_2d_array
+    @table.model_array = arr
   end
 
   def update_student_count(new_cnt)
     @total_count = new_cnt
+    @page_label.text = "#{@current_page} / #{(@total_count / STUDENTS_PER_PAGE.to_f).ceil}"
   end
 
   def create
@@ -90,11 +89,26 @@ class TabStudents
         @pages = horizontal_box {
           stretchy false
 
-          button('1')
-          button('2')
-          button('3')
-          label('...') { stretchy false }
-          button('20')
+          button("<") { stretchy true }
+          button("<") {
+            stretchy true
+
+            on_clicked do
+              @current_page = [@current_page - 1, 1].max
+              @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+            end
+
+          }
+          @page_label = label("...") { stretchy false }
+          button(">") { stretchy true }
+          button(">") {
+            stretchy true
+
+            on_clicked do
+              @current_page = [@current_page + 1, (@total_count / STUDENTS_PER_PAGE.to_f).ceil].min
+              @controller.refresh_data(@current_page, STUDENTS_PER_PAGE)
+            end
+          }
         }
       }
 

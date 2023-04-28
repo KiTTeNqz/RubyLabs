@@ -16,6 +16,10 @@ class DataList
 		@listeners.delete(listener)
 	end
 
+	def notify
+		@listeners.each { |lst| lst.on_datalist_changed(data_table) }
+	end
+
 	def select_element(number)
 		self.selected_num = number < objects.size ? number : nil
 	end
@@ -51,7 +55,7 @@ class DataList
 
 	def replace_objects(objects)
 		self.objects = objects.dup
-		EventManager.notify(EventUpdateStudentsTable.new(data_table, get_names))
+		notify
 	end
 
 	private

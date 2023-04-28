@@ -11,20 +11,18 @@ require 'win32api'
 require 'mysql2'
 class StudentListController
   def initialize(view)
+    @view = view
+    @data_list = DataListStudentShort.new()
+    @data_list.add_listener(@view)
+  end
+
+  def on_view_created
     begin
       @student_list = StudentListAdv.new(StudentsListDBAdapter.new(StudentListDB.instance))
     rescue Mysql2::Error::ConnectionError
-      api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
-      api.call(0, "No connection to DB", "Error", 0)
-      exit(false)
-      return
+      on_db_conn_error
     end
-    #@student_list = StudentListAdv.new(StudentsListConverterAdapter.new(StudentList.new(ConverterJSON.new),
-    #                                                                    'C:/Users/Дмитрий/RubymineProjects/RubyLabs/Lab2/studentsRead.json'))
-    @view = view
-    @data_list = DataListStudentShort.new
   end
-
 
   def add_student(student)
     @student_list.add_student(student)
@@ -51,9 +49,18 @@ class StudentListController
   end
 
   def refresh_data(page, per_page)
-    @data_list = @student_list.get_students_pag(page, per_page, @data_list)
-    @data_list.objects.map{|el| print("DT: "+el.to_s)}
-    @view.update_student_count(@student_list.count)
+    begin
+      @data_list = @student_list.get_students_pag(page, per_page, @data_list)
+      @view.update_student_count(@student_list.count)
+    rescue
+      on_db_conn_error
+    end
+  end
+
+  def on_db_conn_error
+    api = Win32API.new('user32', 'MessageBox', ['L', 'P', 'P', 'L'], 'I')
+    api.call(0, "No connection to DB", "Error", 0)
+    exit(false)
   end
 
 end
