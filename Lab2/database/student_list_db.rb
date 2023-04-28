@@ -33,8 +33,8 @@ class StudentListDB
     database.add_student(student.as_json)
   end
 
-  def get_students_pag(k, n)
-    database.get_k_n_student_short_list(k, n)
+  def get_students_pag(k, n, data)
+    database.get_students_pag(k, n, data)
   end
 
   def count

@@ -4,7 +4,7 @@ class DataList
 	attr_accessor :list, :selected_ids
 
 	def initialize(*elems)
-		self.list = elems.sort_by(&:id)
+		self.list = elems
 		self.selected_ids = []
 	end
 

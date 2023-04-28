@@ -11,7 +11,7 @@ class StudentsListAdapter
   def replace_student(id, student)
   end
 
-  def get_students_slice(k, n)
+  def get_students_pag(k, n, data)
   end
 
   def add_student(student)
@@ -44,8 +44,8 @@ class StudentsListDBAdapter < StudentsListAdapter
     database_list.replace_student(id, student)
   end
 
-  def get_students(from, to)
-    database_list.get_students(from, to)
+  def get_students_pag(from, to, data)
+    database_list.get_students_pag(from, to, data)
   end
 
   def add_student(student)
@@ -81,8 +81,8 @@ class StudentsListConverterAdapter < StudentsListAdapter
     converter.replace_student(id, student)
   end
 
-  def get_students_pag(k, n)
-    converter.get_students_pag(k, n)
+  def get_students_pag(k, n, data=nil)
+    converter.get_students_pag(k, n, data)
   end
 
   def add_student(student)
