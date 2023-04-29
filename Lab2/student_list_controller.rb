@@ -24,30 +24,6 @@ class StudentListController
     end
   end
 
-  def add_student(student)
-    @student_list.add_student(student)
-  end
-
-  def get_student(id)
-    @student_list.get_student(id)
-  end
-
-  def remove_student(id)
-    @student_list.remove_student(id)
-  end
-
-  def replace_student(id, student)
-    @student_list.replace_student(id, student)
-  end
-
-  def get_students_pag(k, n)
-    students_list_adapter.get_students_pag(k, n)
-  end
-
-  def count
-    @student_list.count
-  end
-
   def delete_selected(current_page, per_page, selected_row)
     begin
       student_num = (current_page - 1) * per_page + selected_row
