@@ -48,6 +48,18 @@ class StudentListController
     @student_list.count
   end
 
+  def delete_selected(current_page, per_page, selected_row)
+    begin
+      student_num = (current_page - 1) * per_page + selected_row
+      @data_list.select_element(student_num)
+      student_id = @data_list.selected_id
+      @student_list.remove_student(student_id)
+    rescue
+      on_db_conn_error
+    end
+  end
+
+
   def refresh_data(page, per_page)
     begin
       @data_list = @student_list.get_students_pag(page, per_page, @data_list)
