@@ -65,10 +65,8 @@ class Student < StudentBase
 
 	def self.from_hash(hash)
 		raise ArgumentError,"Missing req fields" unless hash.key?(:last_name) && hash.key?(:first_name) && hash.key?(:parental_name)
-		last_name = hash.delete(:last_name)
-		first_name = hash.delete(:first_name)
-		parental_name = hash.delete(:parental_name)
-		Student.new(last_name, first_name, parental_name, hash)
+		#переделал этот метод после тестов. Теперь вынимаю обязательные параметры из хэша, не удаляя из него
+		Student.new(hash[:last_name], hash[:first_name], hash[:parental_name], hash)
 	end
 
 	def get_short_fio

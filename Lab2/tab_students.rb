@@ -2,8 +2,6 @@
 
 # frozen_string_literal: true
 require 'glimmer-dsl-libui'
-require_relative 'event_manager'
-require_relative  'event_update_student_table'
 require_relative 'student_list_controller'
 require_relative 'student_input_form'
 
@@ -88,7 +86,8 @@ class TabStudents
             'Фамилия И. О' => :text,
             'Гит' => :text,
             'Контакт' => :text,
-          }
+          },
+          per_page: STUDENTS_PER_PAGE
         )
 
         @pages = horizontal_box {
@@ -125,10 +124,16 @@ class TabStudents
           stretchy false
 
           on_clicked {
-            StudentInputForm.new.create.show
+            @controller.show_modal_add
           }
         }
-        button('Изменить') { stretchy false }
+        button('Изменить') {
+          stretchy false
+
+          on_clicked {
+            @controller.show_modal_edit(@current_page, STUDENTS_PER_PAGE, @table.selection) unless @table.selection.nil?
+          }
+        }
         button('Удалить') {
           stretchy false
 
