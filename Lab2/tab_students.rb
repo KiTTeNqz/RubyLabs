@@ -3,7 +3,7 @@
 # frozen_string_literal: true
 require 'glimmer-dsl-libui'
 require_relative '../mvcStudentXD/lib/student_list_controller'
-require_relative '../mvcStudentXD/lib/student_input_form'
+require_relative '../mvcStudentXD/lib/b'
 
 class TabStudents
   include Glimmer

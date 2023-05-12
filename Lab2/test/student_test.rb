@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require  'minitest/autorun'
 require 'json'
-require_relative '../../mvcStudentXD/lib/model/Student'
+require_relative '../../mvcStudentXD/lib/mvcStudentXD'
 
 class StudentTest < Minitest::Test
   def setup

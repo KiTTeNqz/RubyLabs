@@ -30,7 +30,7 @@ GEM
     multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
-    mvcStudentXD (1.1.1)
+    mvcStudentXD (1.2.2)
     mysql2 (0.5.5)
     os (1.1.4)
     parallel (1.23.0)
@@ -88,7 +88,7 @@ PLATFORMS
 DEPENDENCIES
   glimmer-dsl-libui (~> 0.7.4)
   minitest (~> 5.0)
-  mvcStudentXD
+  mvcStudentXD (~> 1.2, >= 1.2.2)
   mysql2
   rake (~> 13.0)
   rubocop (~> 1.21)
