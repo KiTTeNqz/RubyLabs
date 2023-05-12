@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'mvcStudentXD'
+require 'sinatra'
+require 'thin'
 require 'glimmer-dsl-libui'
 require_relative 'tab_students'
 

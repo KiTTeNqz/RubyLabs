@@ -18,5 +18,7 @@ gem 'sinatra', '~> 3.0', '>= 3.0.6'
 
 gem 'thin', '~> 1.8', '>= 1.8.2'
 
+gem "sinatra-contrib"
+
 gem 'mvcStudentXD'
 # gem "rails"
